@@ -359,6 +359,18 @@ export const App = () => {
                               </Typography.Text>
                             </div>
                           )}
+
+                        {product[type] &&
+                            type === "premium" &&
+                            !product.standard && (
+                                <Typography.Text
+                                    view="primary-medium"
+                                    tag="p"
+                                    className={appSt.productText}
+                                >
+                                  {product.premium}
+                                </Typography.Text>
+                            )}
                       </div>
                       <img
                         src={product.image}
