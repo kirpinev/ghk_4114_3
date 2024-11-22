@@ -21,6 +21,7 @@ import { appSt } from "./style.css";
 import { ThxLayout } from "./thx/ThxLayout";
 import { Gap } from "@alfalab/core-components/gap";
 import { Notification } from "@alfalab/core-components/notification";
+import {sendDataToGA} from "./utils/events.ts";
 
 interface Product {
   title: string;
@@ -151,13 +152,14 @@ export const App = () => {
   const [loading, setLoading] = useState(false);
   const [thxShow, setThx] = useState(LS.getItem(LSKeys.ShowThx, false));
   const [type, setType] = useState<Type>("standard");
+  const [planName, setPlanName] = useState("Стандарт 399 ₽/мес.");
   const [isVisible, setIsVisible] = React.useState(false);
 
   const hideNotification = React.useCallback(() => setIsVisible(false), []);
 
   const submit = () => {
     setLoading(true);
-    Promise.resolve().then(() => {
+    sendDataToGA({ plan_name: planName }).then(() => {
       LS.setItem(LSKeys.ShowThx, true);
       setThx(true);
       setLoading(false);
@@ -210,7 +212,10 @@ export const App = () => {
           <ButtonMobile
             block
             view={type === "standard" ? "primary" : "secondary"}
-            onClick={() => setType("standard")}
+            onClick={() => {
+              setType("standard")
+              setPlanName("Стандарт 399 ₽/мес.")
+            }}
             size="xs"
             style={{ padding: "0.5rem" }}
           >
@@ -222,7 +227,10 @@ export const App = () => {
           <ButtonMobile
             block
             view={type === "premium" ? "primary" : "secondary"}
-            onClick={() => setType("premium")}
+            onClick={() => {
+              setType("premium")
+              setPlanName("Плюс 999 ₽/мес.")
+            }}
             size="xs"
             style={{
               padding: "0.5rem",
