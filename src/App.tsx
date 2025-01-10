@@ -257,7 +257,7 @@ export const App = () => {
                 {category.title}
               </Typography.TitleResponsive>
               {category.products.map((product) => (
-                <>
+                <React.Fragment key={product.title}>
                   <div
                     key={product.title}
                     style={{ position: "relative" }}
@@ -391,7 +391,7 @@ export const App = () => {
                       />
                     </div>
                   </div>
-                </>
+                </React.Fragment>
               ))}
             </React.Fragment>
           ))}
