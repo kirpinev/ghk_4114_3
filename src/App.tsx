@@ -246,7 +246,6 @@ export const App = () => {
         <div className={appSt.products}>
           {categories.map((category) => (
             <React.Fragment key={category.title}>
-              <Gap size={8} />
               <Typography.TitleResponsive
                 font="system"
                 tag="h2"
